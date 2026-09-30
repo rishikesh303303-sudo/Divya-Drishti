@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import backgroundImage from "../../assets/background.png";
 import logo from "../../assets/logo.png";
 import {
@@ -6,14 +6,12 @@ import {
   AlertTriangle,
   Archive,
   ArrowDownRight,
-  ArrowUpRight,
   Bell,
   Check,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
   CircleHelp,
-  Clipboard,
   Clock3,
   Copy,
   Database,
@@ -22,21 +20,16 @@ import {
   Filter,
   Gem,
   Globe2,
-  Hash,
   History,
-  Landmark,
   Link2,
-  Menu,
   MessageSquareText,
   Network,
   Paperclip,
   Pause,
-  Play,
   Plus,
   RefreshCcw,
   Search,
   Send,
-  Settings2,
   ShieldAlert,
   ShieldCheck,
   Sparkles,
@@ -1049,28 +1042,7 @@ function EvidencePanel() {
   );
 }
 
-function EyeChain() {
-  return (
-    <svg viewBox="0 0 34 24" aria-hidden="true">
-      <path
-        d="M2 12s5.5-8 15-8 15 8 15 8-5.5 8-15 8S2 12 2 12Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <circle
-        cx="17"
-        cy="12"
-        r="4.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <circle cx="17" cy="12" r="1.6" fill="currentColor" />
-      <path d="M5 5l-2-2M29 5l2-2" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
+
 function FolderLock() {
   return <Archive size={16} />;
 }

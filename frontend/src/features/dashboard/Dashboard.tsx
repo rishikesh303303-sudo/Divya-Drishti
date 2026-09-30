@@ -184,6 +184,29 @@ display: flex;
   font:650 19px/1 'Anybody';
   letter-spacing:-.04em;
 }
+  .collapse-button{
+  margin-left:auto;
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  border:1px solid rgba(207,161,68,.25);
+  border-radius:8px;
+  background:rgba(36,24,16,.55);
+  color:var(--muted);
+  transition:.2s ease;
+}
+
+.collapse-button:hover{
+  color:var(--brass-hi);
+  border-color:rgba(207,161,68,.55);
+  background:rgba(207,161,68,.12);
+}
+
+.collapsed .collapse-button{
+  margin-left:0;
+}
 
 .nav-item{
   width:100%;
@@ -1818,12 +1841,27 @@ function Dashboard() {
       <aside
         className={`nav-rail ${collapsed ? "collapsed" : ""} ${mobileNav ? "mobile-open" : ""}`}
       >
-        <div className="brand">
+       <div className="brand">
   <div className="brand-mark">
     <img src={logo} alt="Divya Drishti Logo" />
   </div>
 
   <span className="brand-name">DIVYA DRISHTI</span>
+
+  <button
+    className="collapse-button"
+    onClick={() => setCollapsed((prev) => !prev)}
+    aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
+    title={collapsed ? "Expand navigation" : "Collapse navigation"}
+  >
+    <ChevronRight
+      size={17}
+      style={{
+        transform: collapsed ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform .3s ease",
+      }}
+    />
+  </button>
 
   <button
     className="mobile-close"

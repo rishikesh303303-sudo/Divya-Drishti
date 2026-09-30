@@ -1,0 +1,116 @@
+# =========================
+# ENVIRONMENT / SECRETS
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# PYTHON
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# TESTING / COVERAGE
+# =========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# =========================
+# IDE / EDITOR
+# =========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+.idea/
+*.iml
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# LOGS
+# =========================
+*.log
+logs/
+
+# =========================
+# DATABASE / LOCAL DATA
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# NODE / FRONTEND
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+.vite/
+
+# =========================
+# CACHE
+# =========================
+.cache/
+.parcel-cache/
+.eslintcache
+
+# =========================
+# TEMPORARY FILES
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# =========================
+# SECRETS / CREDENTIALS
+# =========================
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# =========================
+# LOCAL UPLOADS
+# =========================
+uploads/
+storage/
+
+# =========================
+# ALEMBIC
+# =========================
+# DO NOT ignore alembic.ini
+# DO NOT ignore alembic migrations

@@ -3,6 +3,8 @@ import type { FormEvent } from "react";
 import background2Image from "../../assets/background.png";
 import lampImage from "../../assets/lamp.png";
 import woodenFrameImage from "../../assets/wooden-frame.png";
+import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
   Building2,
@@ -93,7 +95,15 @@ button { cursor: pointer; }
 .pull-rope::after { content: ''; position: absolute; top: 0; left: -1px; height: 100%; border-left: 1px dashed rgba(255,220,163,.42); }
 .pulling .pull-rope { transform: translateY(13px); }
 .rope-knob { position: absolute; bottom: -5px; left: -5px; width: 10px; height: 14px; border-radius: 50%; background: #bd7e42; box-shadow: 0 3px 5px #05060d; }
-.rope-hint { position: absolute; top: 240px; left: -20px; width: 250px; color: rgba(242,204,158,.58); font: 10px 'DM Mono', monospace; letter-spacing: .02em; transition: color .8s; }
+.rope-hint {
+  position: absolute;
+  top: 240px;
+  left: -20px;
+  width: 250px;
+  color: rgba(242,204,158,.58);
+  font: 600 13px 'DM Mono', monospace;
+  letter-spacing: .02em;
+}
 .lamp-on .rope-hint { color: rgba(255,215,167,.8); }
 
 .brand-panel { position: absolute; left: 25%; top: 28%; width: 330px; color: #6a6aad; transition: color 1.2s; }
@@ -103,8 +113,19 @@ button { cursor: pointer; }
     0 2px 0 #6b3f20,
     0 4px 12px rgba(0, 0, 0, 0.75);
 }
-.eye-mark { width: 113px; height: 49px; margin: 0 0 18px 10px; border: 4px solid currentColor; border-width: 4px 0; transform: skewX(-28deg); position: relative; opacity: .72; }
-.eye-mark::before, .eye-mark::after { content: ''; position: absolute; inset: 0 18px; border: 3px solid currentColor; border-width: 3px 0; transform: rotate(45deg); }
+    .brand-logo {
+  width: 150px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin-bottom: 18px;
+  transition: filter 1.2s ease, transform .3s ease;
+}
+
+.lamp-on .brand-logo {
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, .55));
+}
+
 .eye-iris { position: absolute; z-index: 1; left: 44px; top: 11px; width: 22px; height: 22px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 5px rgba(112,102,223,.35), 0 0 15px rgba(133,117,249,.6); }
 .brand-panel h1 {
   margin: 0;
@@ -210,7 +231,7 @@ button { cursor: pointer; }
 .form-heading p { margin: 0; color: #bba7bb; font-size: 9px; }
 .lamp-on .form-heading p { color: #704d5b; }
 .role-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 9px; padding: 3px; border-radius: 12px; background: rgba(4,5,19,.18); }
-.role-tabs button { display: flex; align-items: center; justify-content: center; gap: 4px; min-width: 0; padding: 7px 2px; border: 0; border-radius: 9px; color: #9a8b9f; background: transparent; font-size: 8px; white-space: nowrap; }
+.role-tabs button { display: flex; align-items: center; justify-content: center; gap: 4px; min-width: 0; padding: 7px 2px; border: 0; border-radius: 9px; color: #9a8b9f; background: transparent; font-size: 11px; white-space: nowrap; }
 .role-tabs button.active { color: #fff2e9; background: #4b286e; box-shadow: 0 4px 8px rgba(50,27,76,.2); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .field {
@@ -272,7 +293,7 @@ button { cursor: pointer; }
 .field select { appearance: none; cursor: pointer; }
 .field select option { color: #2b2031; }
 .field-action { display: flex; border: 0; padding: 0; color: inherit; background: transparent; }
-.form-error { margin: -1px 0 7px; color: #e88f8b; font-size: 8px; line-height: 1.3; text-align: center; }
+.form-error { margin: -1px 0 7px; color: #e88f8b; font-size: 12px; line-height: 1.3; text-align: center; }
 .submit-button {
   display: flex;
   align-items: center;
@@ -358,6 +379,7 @@ button { cursor: pointer; }
 `;
 
 function Login() {
+  const navigate = useNavigate();
   const [isLampOn, setIsLampOn] = useState(false);
   const [isPulling, setIsPulling] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -367,12 +389,14 @@ function Login() {
   const [error, setError] = useState("");
 
   const pullCord = () => {
-    setIsPulling(true);
-    window.setTimeout(() => {
-      setIsLampOn((current) => !current);
-      setIsPulling(false);
-    }, 260);
-  };
+  setIsPulling(true);
+
+  window.setTimeout(() => {
+    setIsLampOn((current) => !current);
+    setError(""); // message remove
+    setIsPulling(false);
+  }, 260);
+};
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -392,13 +416,14 @@ function Login() {
     }
 
     setIsSubmitting(true);
-    window.setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1100);
-  };
 
-  return (
+window.setTimeout(() => {
+  setIsSubmitting(false);
+  navigate("/dashboard");
+}, 1100);
+};
+ 
+return (
     <>
       <style>{styles}</style>
       <main className={`login-room ${isLampOn ? "lamp-on" : ""}`}>
@@ -423,14 +448,17 @@ function Login() {
           </span>
         </button>
 
-        <section className="brand-panel" aria-label="Divya Drishti branding">
-          <div className="eye-mark" aria-hidden="true">
-            <span className="eye-iris" />
-          </div>
-          <h1>
-            DIVYA
-            <br />
-            <span>DRISHTI</span>
+       <section className="brand-panel" aria-label="Divya Drishti branding">
+  <img
+    src={logo}
+    alt="Divya Drishti"
+    className="brand-logo"
+  />
+
+  <h1>
+    DIVYA
+    <br />
+    <span>DRISHTI</span>
           </h1>
           <div className="brand-rule" />
           <p>
@@ -517,7 +545,7 @@ function Login() {
                   <input
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Password"
+                    placeholder="Password (DEMO- 1234)"
                     autoComplete="current-password"
                   />
                   <button
@@ -582,5 +610,6 @@ function Login() {
     </>
   );
 }
+
 
 export default Login;
