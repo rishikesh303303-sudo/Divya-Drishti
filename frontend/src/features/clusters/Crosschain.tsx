@@ -20,8 +20,6 @@ import {
   Play,
   RotateCcw,
   Search,
-  ShieldCheck,
-  SlidersHorizontal,
   Sparkles,
   Target,
   ZoomIn,

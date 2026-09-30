@@ -385,7 +385,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState<Role>("lea");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess] = useState(false);
   const [error, setError] = useState("");
 
   const pullCord = () => {
