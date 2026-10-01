@@ -1614,7 +1614,51 @@ kbd{
   border-radius: 10px;
 }
 
+@media (max-width: 680px) {
+  /* Page height = top area (lamp + brand) + circular frame + bottom spacing */
+  .login-room { min-height: calc(490px + min(100vw, 460px) + 60px); }
 
+  /* Lamp: keep it top-left, just smaller */
+  .lamp-control { left: 0; transform: scale(.6); transform-origin: top left; }
+  .lamp-glow { left: -40%; top: -10%; width: 160%; height: 70%; }
+
+  /* Brand block: centered below the lamp */
+  .brand-panel { top: 190px; left: 50%; transform: translateX(-50%); width: 280px; text-align: center; }
+  .brand-logo { width: 100px; margin: 0 auto 12px; }
+  .brand-panel h1 { font-size: 40px; }
+  .brand-rule { margin: 16px auto 12px; }
+
+  /* Wooden circular frame: placed below the brand, almost full width */
+  .login-frame {
+    top: 490px; right: auto; left: 50%; bottom: auto;
+    width: min(100vw, 460px);
+    transform: translateX(-50%);
+  }
+  .frame-inner { inset: 6%; padding: 0; }
+
+  /* Compact form so it fits inside the circle */
+  .login-form { max-width: none; width: 80%; }
+  .form-heading { margin-bottom: 8px; }
+  .form-heading p, .form-note { display: none; }
+  .form-heading h2 { font-size: 22px; }
+  .role-tabs { margin-bottom: 6px; }
+  .role-tabs button { font-size: 10px; padding: 6px 2px; }
+  .role-tabs button svg { display: none; }
+  .field { height: 36px; margin-bottom: 7px; padding: 0 10px; gap: 6px; }
+  .field-row .field svg { display: none; }
+  .submit-button { height: 38px; }
+
+  /* Status pill centered at the bottom; hide desktop-only corner items */
+  .status-pill { left: 50%; bottom: 14px; transform: translateX(-50%); width: max-content; font-size: 8px; }
+  .corner-note, .light-switch { display: none; }
+}
+
+@media (max-width: 390px) {
+  /* Extra small phones */
+  .brand-panel { width: 250px; }
+  .brand-panel h1 { font-size: 36px; }
+  .login-form { width: 82%; }
+}
 @media(prefers-reduced-motion:reduce){
 
   *{

@@ -374,8 +374,44 @@ button { cursor: pointer; }
 @keyframes rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 @media (max-width: 900px) { .brand-panel { left: 8%; } .status-pill { left: 8%; } .login-frame { right: 4%; width: min(48vw, 500px); } }
-@media (max-width: 680px) { .login-room { min-height: 900px; } .lamp-control { left: 5%; transform: scale(.8); transform-origin: top left; } .brand-panel { top: 16%; left: 9%; width: 270px; } .brand-panel h1 { font-size: 44px; } .eye-mark { transform: scale(.8) skewX(-28deg); transform-origin: left; margin-bottom: 5px; } .login-frame { top: auto; right: 50%; bottom: 9%; width: min(88vw, 430px); transform: translateX(50%); } .status-pill { left: 50%; bottom: 4%; transform: translateX(-50%); width: max-content; font-size: 8px; } .corner-note, .light-switch { display: none; } .lamp-glow { left: -55%; top: -10%; width: 160%; height: 78%; } }
-@media (max-width: 390px) { .login-room { min-height: 820px; } .brand-panel { top: 15%; } .login-frame { bottom: 8%; } .frame-inner { margin: 14px; width: calc(100% - 28px); height: calc(100% - 28px); } }
+@media (max-width: 680px) {
+  .login-room { min-height: calc(490px + min(100vw, 460px) + 60px); }
+
+  .lamp-control { left: 0; transform: scale(.6); transform-origin: top left; }
+  .lamp-glow { left: -40%; top: -10%; width: 160%; height: 70%; }
+
+  .brand-panel { top: 190px; left: 50%; transform: translateX(-50%); width: 280px; text-align: center; }
+  .brand-logo { width: 100px; margin: 0 auto 12px; }
+  .brand-panel h1 { font-size: 40px; }
+  .brand-rule { margin: 16px auto 12px; }
+
+  .login-frame {
+    top: 490px; right: auto; left: 50%; bottom: auto;
+    width: min(100vw, 460px);
+    transform: translateX(-50%);
+  }
+  .frame-inner { inset: 6%; padding: 0; }
+
+  .login-form { max-width: none; width: 80%; }
+  .form-heading { margin-bottom: 8px; }
+  .form-heading p, .form-note { display: none; }
+  .form-heading h2 { font-size: 22px; }
+  .role-tabs { margin-bottom: 6px; }
+  .role-tabs button { font-size: 10px; padding: 6px 2px; }
+  .role-tabs button svg { display: none; }
+  .field { height: 36px; margin-bottom: 7px; padding: 0 10px; gap: 6px; }
+  .field-row .field svg { display: none; }
+  .submit-button { height: 38px; }
+
+  .status-pill { left: 50%; bottom: 14px; transform: translateX(-50%); width: max-content; font-size: 8px; }
+  .corner-note, .light-switch { display: none; }
+}
+
+@media (max-width: 390px) {
+  .brand-panel { width: 250px; }
+  .brand-panel h1 { font-size: 36px; }
+  .login-form { width: 82%; }
+}
 `;
 
 function Login() {
