@@ -1614,50 +1614,180 @@ kbd{
   border-radius: 10px;
 }
 
-@media (max-width: 680px) {
-  /* Page height = top area (lamp + brand) + circular frame + bottom spacing */
-  .login-room { min-height: calc(490px + min(100vw, 460px) + 60px); }
-
-  /* Lamp: keep it top-left, just smaller */
-  .lamp-control { left: 0; transform: scale(.6); transform-origin: top left; }
-  .lamp-glow { left: -40%; top: -10%; width: 160%; height: 70%; }
-
-  /* Brand block: centered below the lamp */
-  .brand-panel { top: 190px; left: 50%; transform: translateX(-50%); width: 280px; text-align: center; }
-  .brand-logo { width: 100px; margin: 0 auto 12px; }
-  .brand-panel h1 { font-size: 40px; }
-  .brand-rule { margin: 16px auto 12px; }
-
-  /* Wooden circular frame: placed below the brand, almost full width */
-  .login-frame {
-    top: 490px; right: auto; left: 50%; bottom: auto;
-    width: min(100vw, 460px);
-    transform: translateX(-50%);
-  }
-  .frame-inner { inset: 6%; padding: 0; }
-
-  /* Compact form so it fits inside the circle */
-  .login-form { max-width: none; width: 80%; }
-  .form-heading { margin-bottom: 8px; }
-  .form-heading p, .form-note { display: none; }
-  .form-heading h2 { font-size: 22px; }
-  .role-tabs { margin-bottom: 6px; }
-  .role-tabs button { font-size: 10px; padding: 6px 2px; }
-  .role-tabs button svg { display: none; }
-  .field { height: 36px; margin-bottom: 7px; padding: 0 10px; gap: 6px; }
-  .field-row .field svg { display: none; }
-  .submit-button { height: 38px; }
-
-  /* Status pill centered at the bottom; hide desktop-only corner items */
-  .status-pill { left: 50%; bottom: 14px; transform: translateX(-50%); width: max-content; font-size: 8px; }
-  .corner-note, .light-switch { display: none; }
+/* Collapsed sidebar: stack logo and toggle button vertically */
+.collapsed .brand{
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  padding:0 0 20px;
 }
 
-@media (max-width: 390px) {
-  /* Extra small phones */
-  .brand-panel { width: 250px; }
-  .brand-panel h1 { font-size: 36px; }
-  .login-form { width: 82%; }
+.collapsed .brand-mark{
+  margin:26px 0 30px;
+}
+
+.collapsed .collapse-button{
+  margin:0;
+  display:grid;
+}
+  .nav-backdrop{
+  display:none;
+}
+
+@media(max-width:820px){
+
+  .nav-backdrop{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:5;
+    background:rgba(0,0,0,.55);
+  }
+
+  .brand{
+    gap:8px;
+    padding:0 4px 20px;
+  }
+
+  /* Name shrinks instead of pushing the close button out */
+  .brand-name{
+    flex:1;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size:15px;
+  }
+
+  .mobile-close{
+    display:grid;
+    place-items:center;
+    flex-shrink:0;
+    width:34px;
+    height:34px;
+    margin-left:auto;
+    border:1px solid rgba(207,161,68,.35);
+    border-radius:8px;
+    background:rgba(36,24,16,.7);
+    color:var(--parchment);
+    position:relative;
+    z-index:2;
+  }
+
+  /* On mobile the collapsed layout must not apply */
+  .nav-rail.collapsed .brand{
+    flex-direction:row;
+    padding:0 4px 20px;
+  }
+  .nav-rail.collapsed .brand-mark{
+    margin:0;
+  }
+}
+
+/* =========================================================
+   MOBILE FIXES (desktop untouched)
+   ========================================================= */
+
+@media(max-width:820px){
+
+  /* Prevent the background image from stretching */
+  .wood-board{
+    background-size:cover;
+    background-position:center top;
+  }
+
+  /* Keep the side menu inside the screen */
+  .nav-rail,
+  .nav-rail.collapsed{
+    width:min(260px, calc(100vw - 20px));
+    max-width:calc(100vw - 20px);
+    top:10px;
+    bottom:10px;
+  }
+
+  /* Collapse button is not needed on mobile (specific enough to beat .collapsed rule) */
+  .nav-rail .collapse-button,
+  .nav-rail.collapsed .collapse-button{
+    display:none;
+  }
+
+  /* If the menu was collapsed on desktop, still show the full menu on mobile */
+  .nav-rail.collapsed .brand-name{ display:block; }
+  .nav-rail.collapsed .nav-item span{ display:inline; }
+  .nav-rail.collapsed .rail-bottom{ display:block; }
+  .nav-rail.collapsed .nav-item{ justify-content:flex-start; padding:0 13px; }
+
+  /* Smooth touch scrolling for the table */
+  .table-wrap{ -webkit-overflow-scrolling:touch; }
+}
+
+
+@media(max-width:520px){
+
+  .main-content{ padding:0 12px 22px; }
+
+  .topbar{ gap:8px; }
+
+  /* Queue panel: header can wrap, table takes the remaining space */
+  .queue-panel{
+    height:460px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .queue-panel .panel-header{
+    height:auto;
+    min-height:57px;
+    flex-shrink:0;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:10px 14px;
+  }
+
+  .queue-panel .panel-title p{ line-height:1.3; }
+
+  .queue-panel .table-wrap{
+    height:auto;
+    flex:1;
+    min-height:0;
+  }
+
+  .kpi-card{ height:84px; }
+
+  /* Keep alert titles from overlapping the Acknowledge button */
+  .alert-item>strong{ padding-right:90px; }
+
+  .desk-footer{ padding:16px 2px 0; }
+}
+
+
+@media(max-width:400px){
+
+  .page-heading h1{ font-size:25px; }
+
+  .map-content{
+    gap:0;
+    justify-content:flex-start;
+    padding-left:6px;
+  }
+
+  .india-map{
+    transform:scale(.78);
+    transform-origin:left center;
+    margin-right:-42px;
+  }
+
+  .state-legend{ width:118px; }
+
+  .donut-content{ gap:8px; }
+
+  .donut{
+    width:100px;
+    height:100px;
+  }
+
+  .donut:after{ inset:18px; }
+
+  .donut-legend{ width:125px; }
 }
 @media(prefers-reduced-motion:reduce){
 
@@ -1882,6 +2012,9 @@ function Dashboard() {
 />
       <div className="lamp-glow" />
       <div className="grain" />
+      {mobileNav && (
+        <div className="nav-backdrop" onClick={() => setMobileNav(false)} />
+      )}
       <aside
         className={`nav-rail ${collapsed ? "collapsed" : ""} ${mobileNav ? "mobile-open" : ""}`}
       >
@@ -1921,7 +2054,10 @@ function Dashboard() {
       key={label}
       className={`nav-item ${index === 0 ? "active" : ""}`}
       title={collapsed ? label : undefined}
-      onClick={() => navigate(route)}
+      onClick={() => {
+        setMobileNav(false);
+        navigate(route);
+      }}
     >
       <Icon size={19} />
       <span>{label}</span>
